@@ -23,7 +23,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
 		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakRoleConverter());
 	 
-		http//.cors().and()
+		http.cors().and()
 			.authorizeRequests()
 					.antMatchers(HttpMethod.GET, "/users/status/check") 
 					//.hasAuthority("SCOPE_profile")
@@ -37,17 +37,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 			.jwtAuthenticationConverter(jwtAuthenticationConverter);
 	}
 	
-//	@Bean
-//	CorsConfigurationSource corsConfigurationSource() {
-//		CorsConfiguration corsConfiguration = new CorsConfiguration();
-//		corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
-//		corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST"));
-//		corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
-//		
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		source.registerCorsConfiguration("/**", corsConfiguration);
-//		
-//		return source;
-//	}
-//	
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration corsConfiguration = new CorsConfiguration();
+		corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
+		corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST"));
+		corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
+		
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", corsConfiguration);
+		
+		return source;
+	}
+	
 }
